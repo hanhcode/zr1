@@ -11,9 +11,15 @@
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+//Hanhcode Contact Form Pro
 $(document).ready(function(){
     $("input#ContactForm10_contact-form-submit").hover(function(){
-        var contactFormPhone =$("input#ContactForm10_contact-form-phone").val();
-        $("textarea#ContactForm10_contact-form-email-message").val(contactFormPhone);
+        var contactFormPhone = $("input#ContactForm10_contact-form-phone").val();
+        var contactFormEMClone =$("textarea#ContactForm10_contact-form-email-message-clone").val();
+        if( contactFormEMClone.length === 0 ) {
+            $("textarea#ContactForm10_contact-form-email-message").val('');
+        } else {
+            $("textarea#ContactForm10_contact-form-email-message").val(contactFormEMClone + "\n" + contactFormPhone);
+        }
     });
 });
