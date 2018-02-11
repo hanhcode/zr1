@@ -6,6 +6,7 @@ import Control from './components/Control';
 import Form from './components/Form';
 import List from './components/List';
 import items from './mocks/tasks';
+import {filter, includes, orderBy as funcOrderBy} from 'lodash';
 
 class App extends Component {
     constructor(props) {
@@ -13,42 +14,55 @@ class App extends Component {
         this.state = {
             items: items,
             isShowForm: false,
-            strSearch:'',
+            strSearch: '',
+            orderBy: 'name',
+            orderDir: 'asc',
         };
         this.handleToggleForm = this.handleToggleForm.bind(this);
         this.CloseForm = this.CloseForm.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this.handleSort = this.handleSort.bind(this);
     }
-    handleToggleForm(){
+
+    handleToggleForm() {
         this.setState({
             isShowForm: !this.state.isShowForm
         });
     };
-    CloseForm()
-    {
+
+    CloseForm() {
         this.setState({
             isShowForm: false
         });
     }
-    handleSearch(value){
+
+    handleSearch(value) {
         this.setState({
             strSearch: value
         });
     }
-    render() {
-        let itemsOrigin = this.state.items;
-        let items = [];
-        let isShowForm = this.state.isShowForm;
-        let elmForm = null;
-        let search = this.state.strSearch;
 
-        itemsOrigin.forEach((item) => {
-            if (item.name.toLowerCase().indexOf(search) !== -1) {
-                items.push(item);
-            }
+    handleSort(orderBy, orderDir) {
+        this.setState({
+            orderBy: orderBy,
+            orderDir: orderDir
         });
+    }
 
-        if(isShowForm) {
+    render() {
+        let itemsOrigin = [...this.state.items];// Muc dich itemsOrigin chi copy chu' khong thay doi vung nho this.state.items
+        let items = [];
+        let elmForm = null;
+        let {orderBy, orderDir, isShowForm, strSearch} = this.state;
+        //Search
+        items = filter(itemsOrigin, (item) => {
+            return includes(item.name.toLowerCase(), strSearch.toLowerCase());
+        });
+        //Sort
+        console.log(orderBy + " - " + orderDir);
+        items = funcOrderBy(items, [orderBy], [orderDir]);
+        //
+        if (isShowForm) {
             elmForm = <Form onClickCancel={this.CloseForm}/>;
         }
         return (
@@ -58,6 +72,9 @@ class App extends Component {
                 {/* TITLE : END */}
                 {/* CONTROL (SEARCH + SORT + ADD) : START */}
                 <Control
+                    orderBy={orderBy}
+                    orderDir={orderDir}
+                    onClickSort={this.handleSort}
                     onClickSearchGo={this.handleSearch}
                     strSearch={this.props.strSearch}
                     onClickAdd={this.handleToggleForm}
