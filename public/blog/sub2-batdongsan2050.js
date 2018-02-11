@@ -19,7 +19,7 @@ $(document).ready(function(){
         if( contactFormEMClone.length === 0 ) {
             $("textarea#ContactForm10_contact-form-email-message").val('');
         } else {
-            $("textarea#ContactForm10_contact-form-email-message").val(contactFormEMClone + "\n" + contactFormPhone);
+            $("textarea#ContactForm10_contact-form-email-message").val(contactFormEMClone + "\n" + "Số điện thoại: " + contactFormPhone);
         }
     });
 });
