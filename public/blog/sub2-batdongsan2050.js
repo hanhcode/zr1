@@ -11,3 +11,8 @@
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+$(document).ready(function(){
+    $("input#ContactForm10_contact-form-submit").hover(function(){
+        alert("hanhcode");
+    });
+});
