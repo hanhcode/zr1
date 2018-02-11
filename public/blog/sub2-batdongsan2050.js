@@ -13,6 +13,7 @@ function htmlEntities(str) {
 }
 $(document).ready(function(){
     $("input#ContactForm10_contact-form-submit").hover(function(){
-        alert("hanhcode");
+        var contactFormPhone =$("input#ContactForm10_contact-form-phone").val();
+        $("textarea#ContactForm10_contact-form-email-message").val(contactFormPhone);
     });
 });
