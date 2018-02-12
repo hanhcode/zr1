@@ -2481,6 +2481,7 @@ if (_$_179f[117] != typeof elmt && null != elmt) {
                 h
         } (window, document),
         site = new Bamboo;
+        console.log(Bamboo);
     if ($(_$_179f[1231]).length) {
         var displayGoogleAds = function () {
             $(_$_179f[1231]).each(function () { (adsbygoogle = window.adsbygoogle || []).push({})
