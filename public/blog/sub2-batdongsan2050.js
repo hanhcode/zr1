@@ -22,4 +22,13 @@ $(document).ready(function(){
             $("textarea#ContactForm10_contact-form-email-message").val(contactFormEMClone + "\n" + "Số điện thoại: " + contactFormPhone);
         }
     });
+    $("input#ContactForm1_contact-form-submit").hover(function(){
+        var contactFormPhone1 = $("input#ContactForm1_contact-form-phone").val();
+        var contactFormEMClone1 =$("textarea#ContactForm1_contact-form-email-message-clone").val();
+        if( contactFormEMClone1.length === 0 ) {
+            $("textarea#ContactForm1_contact-form-email-message").val('');
+        } else {
+            $("textarea#ContactForm1_contact-form-email-message").val(contactFormEMClone1 + "\n" + "Số điện thoại: " + contactFormPhone1);
+        }
+    });
 });
